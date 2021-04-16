@@ -18,39 +18,3 @@ resource "google_project_iam_member" "project" {
   role    = "roles/owner"
   member  = "user:julien@codeka.io"
 }
-
-# create a service account for the project
-resource "google_service_account" "terraform-sa" {
-  account_id = "terraform"
-  project    = google_project.challenge-lab.project_id
-}
-
-# add some roles to the service account to be able to create a bucket
-resource "google_project_iam_member" "terraform-sa-compute-admin" {
-  project = google_project.challenge-lab.project_id
-
-  role   = "roles/compute.admin"
-  member = "serviceAccount:${google_service_account.terraform-sa.email}"
-}
-
-# add some roles to the service account to be able to create VM
-resource "google_project_iam_member" "terraform-sa-bucket-admin" {
-  project = google_project.challenge-lab.project_id
-
-  role   = "roles/storage.admin"
-  member = "serviceAccount:${google_service_account.terraform-sa.email}"
-}
-
-# add some roles to the service account to be able to attach an IAM role to a VM
-resource "google_project_iam_member" "terraform-sa-iam" {
-  project = google_project.challenge-lab.project_id
-
-  role   = "roles/iam.serviceAccountUser"
-  member = "serviceAccount:${google_service_account.terraform-sa.email}"
-}
-
-
-# create a key for this service account
-resource "google_service_account_key" "terraform-sa-key" {
-  service_account_id = google_service_account.terraform-sa.id
-}
