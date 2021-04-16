@@ -12,3 +12,9 @@ resource "google_project_service" "project_services" {
   service = "compute.googleapis.com"
 }
 
+# add myself as a owner of the project so i can view its content on the console
+resource "google_project_iam_member" "project" {
+  project = google_project.challenge-lab.project_id
+  role    = "roles/owner"
+  member  = "user:julien@codeka.io"
+}
