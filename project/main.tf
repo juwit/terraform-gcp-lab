@@ -6,7 +6,7 @@ resource "google_project" "challenge-lab" {
   billing_account = var.billing_account
 }
 
-# activate compute API on the project
+# activate compute API on the project (GCS is enabled by default)
 resource "google_project_service" "project_services" {
   project = google_project.challenge-lab.project_id
   service = "compute.googleapis.com"
@@ -25,11 +25,19 @@ resource "google_service_account" "terraform-sa" {
   project    = google_project.challenge-lab.project_id
 }
 
-# add some roles to the service account to be able to create VM
-resource "google_project_iam_member" "terraform-sa" {
+# add some roles to the service account to be able to create VM & bucket
+resource "google_project_iam_member" "terraform-sa-compute-admin" {
   project = google_project.challenge-lab.project_id
 
   role   = "roles/compute.admin"
+  member = "serviceAccount:${google_service_account.terraform-sa.email}"
+}
+
+# add some roles to the service account to be able to create VM
+resource "google_project_iam_member" "terraform-sa-bucket-admin" {
+  project = google_project.challenge-lab.project_id
+
+  role   = "roles/storage.admin"
   member = "serviceAccount:${google_service_account.terraform-sa.email}"
 }
 
