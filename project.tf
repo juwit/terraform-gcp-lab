@@ -5,3 +5,10 @@ resource "google_project" "challenge-lab" {
   org_id          = var.org_id
   billing_account = var.billing_account
 }
+
+# activate compute API on the project
+resource "google_project_service" "project_services" {
+  project = google_project.challenge-lab.project_id
+  service = "compute.googleapis.com"
+}
+
