@@ -32,3 +32,8 @@ resource "google_project_iam_member" "terraform-sa" {
   role   = "roles/compute.admin"
   member = "serviceAccount:${google_service_account.terraform-sa.email}"
 }
+
+# create a key for this service account
+resource "google_service_account_key" "terraform-sa-key" {
+  service_account_id = google_service_account.terraform-sa.id
+}
