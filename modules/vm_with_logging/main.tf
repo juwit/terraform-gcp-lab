@@ -1,3 +1,9 @@
+/*
+ * # GCP VM
+ *
+ * This GCP VM will write some file to a GCS bucket
+ */
+
 resource "google_storage_bucket" "bucket" {
   name     = "challenge-lab-codekaio-logs"
   location = "us-east1"
