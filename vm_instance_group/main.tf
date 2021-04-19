@@ -5,6 +5,35 @@ resource "google_storage_bucket" "bucket" {
   force_destroy = true
 }
 
+resource "google_compute_region_instance_group_manager" "this" {
+  name = "challenge-lab-instance-group"
+
+  base_instance_name = "challenge-lab-instance"
+
+  region = "us-east1"
+
+  version {
+    name              = "web-server"
+    instance_template = google_compute_instance_template.tpl.id
+  }
+}
+
+resource "google_compute_region_autoscaler" "this" {
+  name = "challenge-lab-instance-group-autoscaler"
+
+  region = "us-east1"
+
+  target = google_compute_region_instance_group_manager.this.id
+
+  autoscaling_policy {
+    min_replicas = 1
+    max_replicas = 5
+    cpu_utilization {
+      target = 0.8
+    }
+  }
+}
+
 resource "google_compute_instance_template" "tpl" {
   name         = "challenge-lab-instance-template"
   machine_type = "f1-micro"
@@ -34,7 +63,7 @@ resource "google_compute_instance_template" "tpl" {
       "service-management",
       "service-control",
       "trace",
-      
+
       "storage-rw",
     ]
   }
