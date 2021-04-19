@@ -5,17 +5,17 @@ variable "project_name" {
 
 variable "org_id" {
   type        = string
-  description = "the id of the organisation to create the project in"
+  description = "the id of the organisation to create the project in. One of `org_id` or `folder_id` **MUST** be provided."
   default     = ""
 }
 
 variable "folder_id" {
   type        = string
-  description = "the id of the folder to create the project in"
+  description = "the id of the folder to create the project in. One of `org_id` or `folder_id` **MUST** be provided."
   default     = ""
 }
 
 variable "billing_account" {
   type        = string
-  description = "the billing account id to use for the project"
+  description = "the billing account id to link with the project"
 }
