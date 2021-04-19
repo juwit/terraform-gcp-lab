@@ -1,3 +1,17 @@
+/**
+ * # terraform-gcp-lab / project
+ *
+ * This module creates a GCP project in the root of an org, or in a folder.
+ */
+
+terraform {
+  required_version = ">= 0.14"
+  required_providers {
+    random = ">= 3.1.0"
+    google = ">= 3.64.0"
+  }
+}
+
 resource "random_id" "id" {
   byte_length = 4
   prefix      = var.project_name
