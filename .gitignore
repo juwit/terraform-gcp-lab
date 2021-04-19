@@ -2,3 +2,10 @@
 
 terraform.tfstate
 terraform.tfstate.*
+
+
+# local variable files
+*.auto.tfvars
+
+# service account files
+*-sa.json
