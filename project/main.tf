@@ -5,18 +5,21 @@ resource "random_id" "id" {
 
 # create the project itself
 resource "google_project" "this" {
-  name            = var.project_name
-  project_id      = random_id.id.hex
-  org_id          = var.org_id
+  name       = var.project_name
+  project_id = random_id.id.hex
+
+  org_id    = var.org_id
+  folder_id = var.folder_id
+
   billing_account = var.billing_account
 }
 
 # activate compute API on the project (GCS is enabled by default)
 resource "google_project_service" "project_services" {
-  for_each = toset([ 
-      "compute.googleapis.com",
-      "logging.googleapis.com",
-    ])
+  for_each = toset([
+    "compute.googleapis.com",
+    "logging.googleapis.com",
+  ])
 
   project = google_project.this.project_id
   service = each.key

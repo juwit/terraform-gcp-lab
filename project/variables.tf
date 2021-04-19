@@ -6,6 +6,13 @@ variable "project_name" {
 variable "org_id" {
   type        = string
   description = "the id of the organisation to create the project in"
+  default     = ""
+}
+
+variable "folder_id" {
+  type        = string
+  description = "the id of the folder to create the project in"
+  default     = ""
 }
 
 variable "billing_account" {
