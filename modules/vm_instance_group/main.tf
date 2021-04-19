@@ -1,3 +1,17 @@
+/**
+ * # terraform-gcp-lab / instance_group
+ *
+ * This module creates a GCP regional instance group, with autoscaling.
+ */
+
+terraform {
+  required_version = ">= 0.14"
+  required_providers {
+    random = ">= 3.1.0"
+    google = ">= 3.64.0"
+  }
+}
+
 resource "google_storage_bucket" "bucket" {
   name     = "challenge-lab-codekaio-logs-instance-group"
   location = "us-east1"
