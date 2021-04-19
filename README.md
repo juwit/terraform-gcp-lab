@@ -1,17 +1,20 @@
-# terraform gcp challenge
+# terraform gcp lab
 
-The goal of this challenge is to :
+This repository holds various terraform modules I use to play with GCP.
+
+The goal of this lab is to :
 
 * create a new GCP project
 * associate it to a billing account
 * create a new bucket in this project
 * create a new VM in this project, and configure it to write a file in the bucket
+* create a new VM template and an auto-scaling instance group using the template
 
-## setting up a service account
+## pre-requisites : setting up a service account
 
 see https://cloud.google.com/community/tutorials/managing-gcp-projects-with-terraform
 
-The service account will be created in an "Admin" project, but must be granted organization-wide rights.
+The service account should be created in an "Admin" project, but must be granted organization-wide rights.
 
 The "Admin" project should also have activated the Resource Manager API, and the Billing API:
 
@@ -34,7 +37,7 @@ Create a key for this service account, and save it as a JSON file.
 Create a env var pointing to this key :
 
 ```
-export GOOGLE_CREDENTIALS=admin-project-310807-6a60a4cec925.json
+export GOOGLE_CREDENTIALS=terraform-admin-project-sa.json
 ```
 
 ### add roles
