@@ -22,6 +22,12 @@ module "frontend-sa" {
   service_account_name = "frontend"
 }
 
+module "backend-sa" {
+  source = "./modules/service-account"
+
+  service_account_name = "backend"
+}
+
 //module "frontend" {
 //  source = "./modules/auto-scaling-instance-group"
 //
@@ -32,11 +38,6 @@ module "frontend-sa" {
 //  service_account_email = module.frontend-sa.email
 //}
 
-module "backend-sa" {
-  source = "./modules/service-account"
-
-  service_account_name = "backend"
-}
 
 //module "backend" {
 //  source = "./modules/auto-scaling-instance-group"
