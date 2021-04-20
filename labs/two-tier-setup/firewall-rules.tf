@@ -21,3 +21,15 @@ resource "google_compute_firewall" "allow-ping-from-internet" {
   source_ranges           = ["0.0.0.0/0"]
   target_service_accounts = [module.frontend-sa.email]
 }
+
+resource "google_compute_firewall" "ssh-from-tag" {
+  name    = "allow-ssh"
+  network = module.vpc.id
+
+  allow {
+    protocol = "tcp"
+    ports = [22]
+  }
+
+  target_tags = ["open-ssh-tag"]
+}

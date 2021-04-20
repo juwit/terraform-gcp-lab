@@ -45,6 +45,8 @@ resource "google_compute_instance_template" "tpl" {
     }
   }
 
+  tags = ["open-ssh-tag"]
+
   service_account {
     email = var.service_account_email
     scopes = []
