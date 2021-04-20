@@ -38,7 +38,7 @@ resource "google_compute_instance_template" "tpl" {
   }
 
   network_interface {
-    network = "default"
+    subnetwork = var.subnet
 
     access_config {
       // Ephemeral IP

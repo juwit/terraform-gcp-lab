@@ -13,10 +13,15 @@ This value will be concatenated with a hyphen an 4 digits to generate the instan
 
 variable "source_image" {
   type = string
-  description = "The id of the source_image to use for the instances"
+  description = "The id of the source_image to use for the instances."
 }
 
 variable "service_account_email" {
   type = string
-  description = "The name of the service-account to add to the instances"
+  description = "The name of the service-account to add to the instances."
+}
+
+variable "subnet" {
+  type = string
+  description = "The id of the subnet to create the instances in."
 }

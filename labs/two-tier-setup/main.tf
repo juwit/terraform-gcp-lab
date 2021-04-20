@@ -36,6 +36,7 @@ module "frontend" {
   source_image = "debian-cloud/debian-10"
 
   service_account_email = module.frontend-sa.email
+  subnet = module.vpc.subnets_ids["frontend-subnet"]
 }
 
 
@@ -47,4 +48,5 @@ module "backend" {
   source_image = "debian-cloud/debian-10"
 
   service_account_email = module.backend-sa.email
+  subnet = module.vpc.subnets_ids["backend-subnet"]
 }
