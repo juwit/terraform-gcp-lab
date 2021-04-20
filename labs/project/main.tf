@@ -28,11 +28,12 @@ resource "google_project" "this" {
   billing_account = var.billing_account
 }
 
-# activate compute API on the project (GCS is enabled by default)
+# activate APIs on the project (GCS is enabled by default)
 resource "google_project_service" "project_services" {
   for_each = toset([
     "compute.googleapis.com",
     "logging.googleapis.com",
+    "iam.googleapis.com",
   ])
 
   project = google_project.this.project_id
