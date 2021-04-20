@@ -9,3 +9,7 @@ terraform.tfstate.*
 
 # service account files
 *-sa.json
+
+# IntelliJ files
+.idea/
+*.iml
