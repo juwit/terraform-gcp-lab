@@ -10,3 +10,13 @@ resource "google_compute_network" "this" {
   auto_create_subnetworks = false
   delete_default_routes_on_create = true
 }
+
+resource "google_compute_subnetwork" "this" {
+  for_each = {for network in var.subnets : network.name => { cidr = network.cidr, region = network.region }}
+
+  network = google_compute_network.this.id
+
+  name = each.key
+  ip_cidr_range = each.value.cidr
+  region = each.value.region
+}
