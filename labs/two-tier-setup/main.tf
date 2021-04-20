@@ -6,21 +6,27 @@
  * firewall rules are based on service accounts, except for the open-ssh-tag
 */
 
+module "vpc" {
+  source = "./modules/vpc"
+
+  vpc_name = "two-tier-vpc"
+}
+
 module "frontend-sa" {
   source = "./modules/service-account"
 
   service_account_name = "frontend"
 }
 
-module "frontend" {
-  source = "./modules/auto-scaling-instance-group"
-
-  name = "frontend"
-  base_instance_name = "frontend"
-  source_image = "debian-cloud/debian-10"
-
-  service_account_email = module.frontend-sa.email
-}
+//module "frontend" {
+//  source = "./modules/auto-scaling-instance-group"
+//
+//  name = "frontend"
+//  base_instance_name = "frontend"
+//  source_image = "debian-cloud/debian-10"
+//
+//  service_account_email = module.frontend-sa.email
+//}
 
 module "backend-sa" {
   source = "./modules/service-account"
@@ -28,12 +34,12 @@ module "backend-sa" {
   service_account_name = "backend"
 }
 
-module "backend" {
-  source = "./modules/auto-scaling-instance-group"
-
-  name = "backend"
-  base_instance_name = "backend"
-  source_image = "debian-cloud/debian-10"
-
-  service_account_email = module.backend-sa.email
-}
+//module "backend" {
+//  source = "./modules/auto-scaling-instance-group"
+//
+//  name = "backend"
+//  base_instance_name = "backend"
+//  source_image = "debian-cloud/debian-10"
+//
+//  service_account_email = module.backend-sa.email
+//}
