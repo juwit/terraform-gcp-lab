@@ -11,6 +11,8 @@ resource "google_project_iam_member" "terraform-roles" {
     "roles/storage.admin",
     "roles/iam.serviceAccountUser",
     "roles/iam.serviceAccountCreator",
+    "roles/iam.serviceAccountCreator",
+    "roles/iam.serviceAccountDeleter",
   ])
 
   project = google_project.this.project_id
