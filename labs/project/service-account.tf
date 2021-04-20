@@ -10,6 +10,7 @@ resource "google_project_iam_member" "terraform-roles" {
     "roles/compute.admin",
     "roles/storage.admin",
     "roles/iam.serviceAccountUser",
+    "roles/iam.serviceAccountCreator",
   ])
 
   project = google_project.this.project_id
