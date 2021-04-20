@@ -30,7 +30,7 @@ resource "google_compute_region_autoscaler" "this" {
 }
 
 resource "google_compute_instance_template" "tpl" {
-  name         = "${var.name}-template"
+  name_prefix  = "${var.name}-template-"
   machine_type = "f1-micro"
 
   disk {
@@ -50,5 +50,9 @@ resource "google_compute_instance_template" "tpl" {
   service_account {
     email = var.service_account_email
     scopes = []
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
