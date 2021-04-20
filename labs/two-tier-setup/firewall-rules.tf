@@ -22,6 +22,20 @@ resource "google_compute_firewall" "allow-ping-from-internet" {
   target_service_accounts = [module.frontend-sa.email]
 }
 
+resource "google_compute_firewall" "deny-internet-access-to-backend" {
+  name = "deny-internet-access-to-backend"
+  network = module.vpc.id
+
+  direction = "EGRESS"
+
+  deny {
+    protocol = "all"
+  }
+
+  destination_ranges = ["0.0.0.0/0"]
+  target_service_accounts = [module.backend-sa.email]
+}
+
 resource "google_compute_firewall" "ssh-from-tag" {
   name    = "allow-ssh"
   network = module.vpc.id
