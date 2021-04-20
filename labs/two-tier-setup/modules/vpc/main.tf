@@ -19,3 +19,18 @@ resource "google_compute_subnetwork" "this" {
   ip_cidr_range = each.value.cidr
   region = each.value.region
 }
+
+resource "google_compute_subnetwork" "lb" {
+  provider = google-beta
+
+  for_each = {for network in var.lb-subnets : network.name => { cidr = network.cidr, region = network.region }}
+
+  network = google_compute_network.this.id
+
+  name = each.key
+  ip_cidr_range = each.value.cidr
+  region = each.value.region
+
+  purpose = "INTERNAL_HTTPS_LOAD_BALANCER"
+  role = "ACTIVE"
+}

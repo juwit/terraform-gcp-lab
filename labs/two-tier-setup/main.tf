@@ -15,6 +15,9 @@ module "vpc" {
     { region = "us-east1", cidr = "10.0.1.0/24", name = "frontend-subnet" },
     { region = "us-east1", cidr = "10.0.2.0/24", name = "backend-subnet" },
   ]
+  lb-subnets = [
+    { region = "us-east1", cidr = "10.1.1.0/24", name = "lb-subnet" },
+  ]
 }
 
 module "frontend-sa" {
@@ -39,7 +42,6 @@ module "frontend" {
   service_account_email = module.frontend-sa.email
   subnet = module.vpc.subnets_ids["frontend-subnet"]
 }
-
 
 module "backend" {
   source = "./modules/auto-scaling-instance-group"

@@ -11,3 +11,12 @@ variable "subnets" {
   }))
   description = "The subnet definitions to create in the VPC."
 }
+
+variable "lb-subnets" {
+  type = list(object({
+    name = string
+    region = string
+    cidr   = string
+  }))
+  description = "The subnet definitions foir load balancing to create in the VPC."
+}
