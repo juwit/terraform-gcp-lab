@@ -34,7 +34,7 @@ module "frontend" {
 
   name = "frontend"
   base_instance_name = "frontend"
-  source_image = "debian-cloud/debian-10"
+  source_image = "httpd"
 
   service_account_email = module.frontend-sa.email
   subnet = module.vpc.subnets_ids["frontend-subnet"]
@@ -46,7 +46,8 @@ module "backend" {
 
   name = "backend"
   base_instance_name = "backend"
-  source_image = "debian-cloud/debian-10"
+  # uses the image build with packer in labs / packer_vm_image
+  source_image = "httpd"
 
   service_account_email = module.backend-sa.email
   subnet = module.vpc.subnets_ids["backend-subnet"]

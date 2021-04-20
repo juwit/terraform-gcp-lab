@@ -1,21 +1,23 @@
-resource "google_compute_firewall" "allow-icmp" {
-  name    = "backend-fw-icmp"
+resource "google_compute_firewall" "allow-http" {
+  name    = "backend-fw-http"
   network = module.vpc.id
 
   allow {
-    protocol = "icmp"
+    protocol = "tcp"
+    ports = [80]
   }
 
   source_service_accounts = [module.frontend-sa.email]
   target_service_accounts = [module.backend-sa.email]
 }
 
-resource "google_compute_firewall" "allow-ping-from-internet" {
-  name    = "frontend-fw-icmp-internet"
+resource "google_compute_firewall" "allow-http-from-internet" {
+  name    = "frontend-fw-http-internet"
   network = module.vpc.id
 
   allow {
-    protocol = "icmp"
+    protocol = "tcp"
+    ports = [80]
   }
 
   source_ranges           = ["0.0.0.0/0"]
