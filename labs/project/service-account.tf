@@ -13,6 +13,7 @@ resource "google_project_iam_member" "terraform-roles" {
     "roles/iam.serviceAccountCreator",
     "roles/iam.serviceAccountCreator",
     "roles/iam.serviceAccountDeleter",
+    "roles/resourcemanager.projectIamAdmin"
   ])
 
   project = google_project.this.project_id
