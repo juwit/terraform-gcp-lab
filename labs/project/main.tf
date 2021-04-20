@@ -34,6 +34,7 @@ resource "google_project_service" "project_services" {
     "compute.googleapis.com",
     "logging.googleapis.com",
     "iam.googleapis.com",
+    "cloudresourcemanager.googleapis.com",
   ])
 
   project = google_project.this.project_id
